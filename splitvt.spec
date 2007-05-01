@@ -1,7 +1,7 @@
 Summary:	Split terminal into two windows
 Name:		splitvt
-Version:	1.6.5
-Release:	%mkrel 7
+Version:	1.6.6
+Release:	%mkrel 1
 License:	GPL
 Group:		Terminals 
 URL:		http://www.devolution.com/~slouken/projects/splitvt
@@ -22,7 +22,7 @@ messing with windows.
 %prep
 
 %setup -q
-%patch0 -p0
+%patch0 -p0 -b .destdir
 %patch1 -p0 -b .gcc4
 
 # lib64 fix
@@ -38,13 +38,11 @@ rm -rf $RPM_BUILD_ROOT
 
 chmod 644 README BLURB ANNOUNCE CHANGES NOTES COPYING TODO
 mkdir -p %buildroot%{_bindir}
+mkdir -p %buildroot%{_mandir}/man1/
 
-%makeinstall_std
+%makeinstall_std PREFIX=%_prefix MANDIR=%_mandir
 
 chmod 755 %buildroot%{_bindir}/*
-
-mkdir -p %buildroot%{_mandir}/man1/
-bzip2 -c splitvt.1 > %buildroot%{_mandir}/man1/splitvt.1.bz2
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -54,6 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc README BLURB ANNOUNCE CHANGES NOTES COPYING TODO
 %_bindir/splitvt
 %_bindir/xsplitvt
-%_mandir/man1/splitvt.1.bz2
-
+%_mandir/man1/splitvt.1*
 
