@@ -10,7 +10,6 @@ Patch0:		%{name}-destdir.patch
 Patch1:		splitvt-1.6.5.gcc4.patch
 BuildRequires:	libnet1.1.2-devel
 BuildRequires:	libtermcap-devel
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 This program takes any VT100 terminal window and splits it
