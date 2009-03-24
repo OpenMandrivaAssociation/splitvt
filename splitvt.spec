@@ -52,5 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc README BLURB ANNOUNCE CHANGES NOTES COPYING TODO
 %_bindir/splitvt
 %_bindir/xsplitvt
-%_mandir/man1/splitvt.1*
+%attr(0644,root,root) %_mandir/man1/splitvt.1*
 
