@@ -8,7 +8,7 @@ URL:		http://www.devolution.com/~slouken/projects/splitvt
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-destdir.patch
 Patch1:		splitvt-1.6.5.gcc4.patch
-BuildRequires:	libnet1.1.2-devel
+BuildRequires:	net-devel
 BuildRequires:	libtermcap-devel
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 
