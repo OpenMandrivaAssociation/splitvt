@@ -7,7 +7,6 @@ Group:		Terminals
 URL:		http://www.devolution.com/~slouken/projects/splitvt
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-destdir.patch
-Patch1:		splitvt-1.6.5.gcc4.patch
 BuildRequires:	net-devel
 BuildRequires:	libtermcap-devel
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -23,7 +22,6 @@ messing with windows.
 
 %setup -q
 %patch0 -p0 -b .destdir
-%patch1 -p0 -b .gcc4
 
 # lib64 fix
 perl -pi -e "s|/usr/lib\b|%{_libdir}|g" config.c
