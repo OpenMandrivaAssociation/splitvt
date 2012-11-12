@@ -1,0 +1,62 @@
+--- ./config.c.destdir	2007-04-01 17:23:46.000000000 +0200
++++ ./config.c	2007-05-01 18:51:17.000000000 +0200
+@@ -86,7 +86,7 @@
+ 	if ( exists("/", "hp-ux") ) {
+ 		VERBOSE_PRINT("\tI see you are running HP-UX.\n");
+ 		strcat(cflags, " -DHP_UX");
+-	} else if ( exists("/usr/lib", "libsocket.a") ) {   /* Solaris 2.1 */
++	} else if ( exists("/usr/lib64", "libsocket.so") ) {   /* Solaris 2.1 */
+ 		strcat(ldflags, " -lsocket");
+ 		strcat(cflags, " -g -DSOLARIS");
+ 		solaris=1;
+@@ -106,7 +106,7 @@
+ #endif /* linux */
+ 
+ 	/* Check for the termcap library */
+-	if ( exists("/usr/lib", "libtermcap.a") ) {
++	if ( exists("/usr/lib64", "libtermcap.so") ) {
+ 		strcat(cflags, " -DTERMCAP");
+ 		strcat(ldflags, " -ltermcap");
+ 		VERBOSE_PRINT("\tUsing the termcap library for terminal support.\n");
+@@ -161,13 +161,13 @@
+ 		VERBOSE_PRINT("\tI will use wait4() instead of waitpid().\n");
+ 	}
+ 
+-	if ( exists("/usr/lib", "libnet.a") )	/* Socket routines */
++	if ( exists("/usr/lib64", "libnet.so") )	/* Socket routines */
+ 		strcat(ldflags, " -lnet");
+-	if ( exists("/usr/lib", "libnsl.a") )	/* AT&T socket library */
++	if ( exists("/usr/lib64", "libnsl.so") )	/* AT&T socket library */
+ 		strcat(ldflags, " -lnsl");
+-	if ( exists("/usr/lib", "libnsl_s.a") )	/* AT&T socket library */
++	if ( exists("/usr/lib64", "libnsl_s.so") )	/* AT&T socket library */
+ 		strcat(ldflags, " -lnsl_s");
+-	if ( exists("/usr/lib", "libsun.a") )	/* IRIX yp routines */
++	if ( exists("/usr/lib64", "libsun.so") )	/* IRIX yp routines */
+ 		strcat(ldflags, " -lsun");
+ 
+ 	/* Tell the user what kind of configuration to do */
+@@ -215,6 +215,9 @@
+ 	fprintf(makefile, 
+ "# Shareware copyright 1993, by Sam Lantinga\n\n");
+ #ifdef linux
++	fprintf(makefile, "\nDESTDIR = \n");
++	fprintf(makefile, "PREFIX = /usr/local\n");
++	fprintf(makefile, "MANDIR = $(PREFIX)/share/man\n");
+ 	fprintf(makefile, "\nCC = gcc\n");
+ #endif
+ 	fclose(makefile);
+@@ -240,10 +243,10 @@
+ 	fprintf(makefile, "\nclean: \n\trm -f *.o core \n");
+ 	fprintf(makefile, "\ndistclean: clean\n\trm -f splitvt Makefile\n");
+ 	fprintf(makefile, "\ninstall: install-man\n");
+-	fprintf(makefile, "\tmv splitvt /usr/local/bin/splitvt\n");
+-	fprintf(makefile, "\tmv examples/xsplitvt /usr/local/bin/xsplitvt\n");
++	fprintf(makefile, "\tmv splitvt $(DESTDIR)$(PREFIX)/bin/splitvt\n");
++	fprintf(makefile, "\tmv examples/xsplitvt $(DESTDIR)$(PREFIX)/bin/xsplitvt\n");
+ 	fprintf(makefile, "\ninstall-man:\n");
+-	fprintf(makefile, "\tcp splitvt.man /usr/local/man/man1/splitvt.1\n");
++	fprintf(makefile, "\tcp splitvt.man $(DESTDIR)$(MANDIR)/man1/splitvt.1\n");
+ 
+ 	fclose(makefile);
+ 	exit(0);
