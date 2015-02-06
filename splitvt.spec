@@ -3,7 +3,7 @@
 Summary:	Split terminal into two windows
 Name:		splitvt
 Version:	1.6.6
-Release:	7
+Release:	8
 License:	GPL
 Group:		Terminals 
 URL:		http://www.devolution.com/~slouken/projects/splitvt
