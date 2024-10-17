@@ -6,7 +6,7 @@ Version:	1.6.6
 Release:	8
 License:	GPL
 Group:		Terminals 
-URL:		http://www.devolution.com/~slouken/projects/splitvt
+URL:		https://www.devolution.com/~slouken/projects/splitvt
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-destdir.patch
 BuildRequires:	net-devel
